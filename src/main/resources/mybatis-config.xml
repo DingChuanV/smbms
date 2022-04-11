@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--配置-->
+<configuration>
+    <!-- 引入外部配置文件-->
+    <properties resource="database.properties"/>
+    <!--配置日志-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!--别名-->
+    <typeAliases>
+        <typeAlias type="com.uin.pojo.User" alias="User"/>
+        <typeAlias type="com.uin.pojo.Address" alias="Address"/>
+        <typeAlias type="com.uin.pojo.Provider" alias="Provider"/>
+        <typeAlias type="com.uin.pojo.Role" alias="Role"/>
+        <typeAlias type="com.uin.pojo.Bill" alias="Bill"/>
+        <typeAlias type="com.uin.vo.UserSearchVo" alias="userVo"/>
+    </typeAliases>
+    <!--配置mybatis的运行环境-->
+    <environments default="development">
+        <environment id="development">
+            <!--使用JDBC的事务管理-->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!-- MySQL数据库驱动 -->
+                <property name="driver" value="${driver}"/>
+                <!-- 连接数据库的URL -->
+                <property name="url" value="${url}"/>
+                <!--username-->
+                <property name="username" value="${username}"/>
+                <!--password-->
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 将mapper文件加入到配置文件中 -->
+    <mappers>
+        <mapper resource="com/uin/mapper/UserMapper.xml"/>
+        <mapper resource="com/uin/mapper/AddressMapper.xml"/>
+        <mapper resource="com/uin/mapper/BillMapper.xml"/>
+        <mapper resource="com/uin/mapper/ProviderMapper.xml"/>
+        <mapper resource="com/uin/mapper/RoleMapper.xml"/>
+    </mappers>
+
+    <!--    <mappers>-->
+    <!--        <package name="com.uin.mapper"/>-->
+    <!--    </mappers>-->
+</configuration>

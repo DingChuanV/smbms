@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.uin.mapper.UserMapper">
+    <insert id="addUser" parameterType="User">
+        insert into smbms.smbms_user(userCode, userName, userPassword, gender, birthday, phone,
+                                     address, userRole, createdBy, creationDate)
+        values (#{userCode}, #{userName}, #{userPassword}, #{gender}, #{birthday}, #{phone},
+                #{address},
+                #{userRole}, #{createdBy}, #{creationDate});
+    </insert>
+
+    <update id="updateUser">
+        update smbms.smbms_user
+        set userCode=#{userCode},
+            userName=#{userName},
+            userPassword=#{userPassword},
+            gender=#{gender},
+            birthday=#{birthday},
+            phone=#{phone},
+            address=#{address},
+            userRole=#{userRole},
+            modifyBy=#{modifyBy},
+            modifyDate=#{modifyDate}
+        where id = #{id};
+    </update>
+    <update id="updatePwd">
+        update smbms_user
+        set userPassword=#{userPassword}
+        where id = #{id};
+    </update>
+    <delete id="deleteUserById">
+        delete
+        from smbms_user where id=
+        #{id};
+    </delete>
+
+    <select id="queryAllUser" resultType="User">
+        select *
+        from smbms_user;
+    </select>
+    <select id="getUserByUsername" resultType="com.uin.pojo.User">
+        select *
+        from smbms_user
+        where userName like CONCAT('%', #{username}, '%')
+    </select>
+    <select id="queryUserById" resultType="com.uin.pojo.User">
+        select *
+        from smbms_user
+        where id = #{id};
+    </select>
+    <select id="queryUserByUser" resultType="com.uin.pojo.User">
+        select id,
+               userName,
+               userRole as roleId
+        from smbms_user
+        where userName like CONCAT('%', #{username}, '%')
+          and userRole = #{roleId};
+    </select>
+
+    <resultMap id="userList" type="User">
+        <result property="userRoleName" column="roleName"/>
+    </resultMap>
+    <select id="queryUserByUser2" resultMap="userList">
+        select user.*,
+               role.roleName
+        from smbms_user user
+        inner join
+                smbms_role role
+        on
+            user.userRole= role.id
+        where
+            user.userName like CONCAT('%'
+            , #{userName}
+            , '%')
+          and userRole = #{roleId};
+    </select>
+
+    <select id="queryUserVO" resultType="User" parameterType="userVo">
+        select *
+        from smbms_user
+        where userName like CONCAT('%', #{userName}, '%')
+          and userRole = #{roleId};
+    </select>
+    <resultMap id="userRoleList" type="User">
+        <association property="userRoleName"/>
+    </resultMap>
+    <select id="queryRoleByUserName" resultType="com.uin.pojo.User" resultMap="userRoleList">
+        select user.*,
+               role.roleName
+        from smbms_user as user ,
+        inner join
+            smbms_role ad role
+        on
+            user.userRole= role.id
+        where
+            userName like CONCAT('%'
+            , #{userName}
+            , '%')
+          and userRole=#{roleId};
+    </select>
+
+    <resultMap id="UserListAndRole" type="User">
+        <id property="id" column="id"/>
+        <result property="userName" column="userName"/>
+        <result property="userCode" column="userCode"/>
+        <result property="phone" column="phone"/>
+        <result property="birthday" column="birthday"/>
+        <result property="gender" column="gender"/>
+        <result property="userRole" column="userRole"/>
+        <result property="userRoleName" column="roleName"/>
+    </resultMap>
+
+    <select id="queryAllUserShowRole" resultMap="UserListAndRole">
+        select user.*,
+               role.roleName
+        from smbms.smbms_user as user ,
+             smbms.smbms_role as role
+        where
+            user.userName like CONCAT('%'
+            , #{userName}
+            , '%')
+          and user.userRole=#{userRole}
+          and user.userRole = role.id;
+    </select>
+
+</mapper>
