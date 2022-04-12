@@ -1,39 +1,39 @@
 # smbms
 java框架课的作业
 
-## 项目背景
+## 🐶项目背景
 
 smbms是一个超市管理系统
 
 后续补充。。。
 
-## 技术栈
+## 🐱技术栈
 
 Mybatis+SpringMVC+Spring+MySQL
 
-## 自己整理的关于Mybatis面试题
+## 🐭自己整理的关于Mybatis面试题
 
 https://www.cnblogs.com/bearbrick0/p/16045422.html
 
-## 项目实施
+## 🐹项目实施
 
 后续补充。。。
 
-## MyBatis学习
-### 新增一个需求 
+## 🐰MyBatis学习
+### 🦊新增一个需求 
 1. 定义一个接口、方法、API
 2. 定义一个Mapper.xml，写方法所对应的sql，去数据库访问
 3. insert、delete、update只有int，select查询需要返回结果，sql字段映射到java的对象
 4. 测速我们写的接口中的方法 junit 白盒测试
 
-### mybatis 中的 DAO 接口和 XML 文件里的 SQL 是如何建立关系的？
+### 🐻mybatis 中的 DAO 接口和 XML 文件里的 SQL 是如何建立关系的？
 https://blog.csdn.net/v123411739/article/details/105932248
 
 
-### resultType 自动映射
+### 🐼resultType 自动映射
 Mybatis中使用resultType做自动映射，要注意字段名和POJO的属性名必须一致。若不一致，则需要给字段起别名，保证别名与属性名一致。
 
-### resultMap 手动映射
+### 🐻‍❄️resultMap 手动映射
 查询用户表和角色表
 ```xml
 <resultMap id="userList" type="User">
@@ -60,7 +60,7 @@ Mybatis中使用resultType做自动映射，要注意字段名和POJO的属性�
           and userRole = #{roleId};
     </select>
 ```
-### 实现高级结果的映射
+### 🐨实现高级结果的映射
 1. 处理一对一的关系
 本系统中，一个用户user对应一个角色role。
 - 首先要解决，java类怎么支持，一对一的关系。在user模型中
@@ -166,7 +166,7 @@ private Role role;
 
 
 
-### 更加全面的关于Mybatis的高级映射demo
+### 🐯更加全面的关于Mybatis的高级映射demo
 https://github.com/bearbrick0/Mybatis_test
 
 
