@@ -3,6 +3,44 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.uin.mapper.RoleMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.uin.pojo.Role">
+        <id column="id" property="id"/>
+        <result column="roleCode" property="roleCode"/>
+        <result column="roleName" property="roleName"/>
+        <result column="createdBy" property="createdBy"/>
+        <result column="creationDate" property="creationDate"/>
+        <result column="modifyBy" property="modifyBy"/>
+        <result column="modifyDate" property="modifyDate"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , roleCode, roleName, createdBy, creationDate, modifyBy, modifyDate
+    </sql>
+
+
+    <insert id="addRole">
+        insert into smbms_role (roleCode, roleName, createdBy, creationDate, modifyBy, modifyDate)
+        values (#{roleCode}, #{roleName}, #{createdBy}, #{creationDate}, #{modifyBy},
+                #{modifyDate});
+    </insert>
+    <update id="updateRole">
+        update smbms_role
+        set roleCode=#{roleCode},
+            roleName=#{roleName},
+            createdBy=#{createdBy},
+            creationDate=#{creationDate},
+            modifyBy=#{modifyBy},
+            modifyDate=#{modifyDate}
+        where id=#{id};
+    </update>
+    <delete id="deleteById">
+        delete
+        from smbms_role
+        where id=#{id};
+    </delete>
 
     <select id="queryAllRole" resultType="Role">
         select *

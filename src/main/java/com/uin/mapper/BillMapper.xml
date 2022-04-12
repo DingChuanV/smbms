@@ -3,8 +3,61 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.uin.mapper.BillMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.uin.pojo.Bill">
+        <id column="id" property="id"/>
+        <result column="billCode" property="billCode"/>
+        <result column="productName" property="productName"/>
+        <result column="productDesc" property="productDesc"/>
+        <result column="productUnit" property="productUnit"/>
+        <result column="productCount" property="productCount"/>
+        <result column="totalPrice" property="totalPrice"/>
+        <result column="isPayment" property="isPayment"/>
+        <result column="createdBy" property="createdBy"/>
+        <result column="creationDate" property="creationDate"/>
+        <result column="modifyBy" property="modifyBy"/>
+        <result column="modifyDate" property="modifyDate"/>
+        <result column="providerId" property="modifyDate"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , billCode, productName, productDesc, productUnit, productCount, totalPrice, isPayment, createdBy, creationDate, modifyBy, modifyDate, providerId
+    </sql>
+
+    <insert id="addBill">
+        insert into smbms_bill(billCode, productName, productDesc, productUnit, productCount,
+                               totalPrice, isPayment, createdBy, creationDate, modifyBy, modifyDate,
+                               providerId)
+        values (#{billCode}, #{productName}, #{productDesc}, #{productUnit}, #{productCount},
+                #{totalPrice}, #{isPayment}, #{createdBy}, #{creationDate}, #{modifyBy},
+                #{modifyDate}, #{providerId});
+    </insert>
+    <update id="updateBill">
+        update smbms_bill
+        set billCode=#{billCode},
+            productName=#{productName},
+            productDesc=#{productDesc},
+            productUnit=#{productUnit},
+            productCount=#{productCount},
+            totalPrice=#{totalPrice},
+            isPayment=#{isPayment},
+            createdBy=#{createdBy},
+            creationDate=#{creationDate},
+            modifyBy=#{modifyBy},
+            modifyDate=#{modifyDate},
+            providerId=#{providerId}
+        where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete
+        from smbms_bill
+        where id = #{id};
+    </delete>
 
     <select id="queryAllBill" resultType="Bill">
-        select * from smbms.smbms_bill;
+        select *
+        from smbms.smbms_bill;
     </select>
 </mapper>

@@ -3,8 +3,58 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.uin.mapper.ProviderMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.uin.pojo.Provider">
+        <id column="id" property="id"/>
+        <result column="proCode" property="proCode"/>
+        <result column="proName" property="proName"/>
+        <result column="proDesc" property="proDesc"/>
+        <result column="proContact" property="proContact"/>
+        <result column="proPhone" property="proPhone"/>
+        <result column="proAddress" property="proAddress"/>
+        <result column="proFax" property="proFax"/>
+        <result column="createdBy" property="createdBy"/>
+        <result column="creationDate" property="creationDate"/>
+        <result column="modifyDate" property="modifyDate"/>
+        <result column="modifyBy" property="modifyBy"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , proCode, proName, proDesc, proContact, proPhone, proAddress, proFax, createdBy, creationDate, modifyDate, modifyBy
+    </sql>
+
+
+    <insert id="addProvider">
+        insert into smbms_provider (proCode, proName, proDesc, proContact, proPhone, proAddress,
+                                    proFax, createdBy, creationDate, modifyDate, modifyBy)
+        values (#{proCode}, #{proName}, #{proDesc}, #{proContact}, #{proPhone}, #{proAddress},
+                #{proFax}, #{createdBy}, #{creationDate}, #{modifyDate}, #{modifyBy});
+    </insert>
+    <update id="updateProvider">
+        update smbms_provider
+        set proCode=#{proCode},
+            proName=#{proName},
+            proDesc=#{proDesc},
+            proContact=#{proContact},
+            proPhone=#{proPhone},
+            proAddress=#{proAddress},
+            proFax=#{proFax},
+            createdBy=#{createdBy},
+            creationDate=#{creationDate},
+            modifyDate=#{modifyDate},
+            modifyBy=#{modifyBy}
+        where id = #{id};
+    </update>
+    <delete id="deleteById">
+        delete
+        from smbms_provider
+        where id=#{id};
+    </delete>
 
     <select id="queryAllProvider" resultType="Provider">
-        select * from smbms.smbms_provider;
+        select *
+        from smbms.smbms_provider;
     </select>
 </mapper>

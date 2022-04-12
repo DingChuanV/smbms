@@ -1,6 +1,8 @@
 package com.uin.mapper;
 
+import com.uin.pojo.Bill;
 import com.uin.pojo.Provider;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +20,33 @@ public interface ProviderMapper {
      * @date 2022/3/29 8:55 AM
      */
     List<Provider> queryAllProvider();
+
+    /**
+     * add
+     *
+     * @param provider
+     * @return int
+     * @author wanglufei
+     * @date 2022/4/12 11:31 AM
+     */
+    int addProvider(Provider provider);
+
+    /**
+     * update
+     *
+     * @param provider
+     * @return int
+     * @author wanglufei
+     * @date 2022/4/12 11:31 AM
+     */
+    int updateProvider(Provider provider);
+
+    /**
+     * delete
+     * @author wanglufei
+     * @date 2022/4/12 11:31 AM
+     * @param id
+     * @return int
+     */
+    int deleteById(@Param("id") int id);
 }
