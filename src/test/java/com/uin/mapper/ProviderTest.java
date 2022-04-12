@@ -1,6 +1,7 @@
 package com.uin.mapper;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.uin.pojo.Provider;
 import com.uin.utils.MybatisUtils;
@@ -13,6 +14,21 @@ import org.junit.Test;
  * @date 2022/4/12/11:35 AM
  */
 public class ProviderTest {
+    /**
+     * query
+     *
+     * @author wanglufei
+     * @date 2022/4/12 12:00 PM
+     */
+    @Test
+    public void query() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        ProviderMapper mapper = sqlSession.getMapper(ProviderMapper.class);
+        List<Provider> providers = mapper.queryAllProvider();
+        System.out.println(providers);
+        sqlSession.close();
+    }
+
     /**
      * add-test
      *
@@ -77,7 +93,7 @@ public class ProviderTest {
     }
 
     @Test
-    public void deleteByIdTest(){
+    public void deleteByIdTest() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         ProviderMapper mapper = sqlSession.getMapper(ProviderMapper.class);
         int i = mapper.deleteById(16);

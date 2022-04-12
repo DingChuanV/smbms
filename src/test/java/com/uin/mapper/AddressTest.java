@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author wanglufei
@@ -13,6 +14,21 @@ import java.util.Date;
  * @date 2022/4/12/10:30 AM
  */
 public class AddressTest {
+    /**
+     * query
+     *
+     * @author wanglufei
+     * @date 2022/4/12 11:58 AM
+     */
+    @Test
+    public void query() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        AddressMapper mapper = sqlSession.getMapper(AddressMapper.class);
+        List<Address> addresses = mapper.queryAllAddress();
+        System.out.println(addresses);
+        sqlSession.close();
+    }
+
     /**
      * 增加-测试类
      *

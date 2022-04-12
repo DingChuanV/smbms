@@ -2,6 +2,7 @@ package com.uin.mapper;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.uin.pojo.Bill;
 import com.uin.utils.MybatisUtils;
@@ -14,6 +15,21 @@ import org.junit.Test;
  * @date 2022/4/12/11:14 AM
  */
 public class BillTest {
+    /**
+     * query
+     *
+     * @author wanglufei
+     * @date 2022/4/12 11:58 AM
+     */
+    @Test
+    public void query() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        BillMapper mapper = sqlSession.getMapper(BillMapper.class);
+        List<Bill> bills = mapper.queryAllBill();
+        System.out.println(bills);
+        sqlSession.close();
+    }
+
     /**
      * add-test
      *
