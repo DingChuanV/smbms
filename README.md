@@ -11,6 +11,9 @@ smbms是一个超市管理系统
 
 Mybatis+SpringMVC+Spring+MySQL
 
+## 自己整理的关于Mybatis面试题
+
+https://www.cnblogs.com/bearbrick0/p/16045422.html
 
 ## 项目实施
 
