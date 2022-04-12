@@ -147,6 +147,7 @@ private Role role;
     </select>
 ```
 测试
+
 ```java
 /**
      * 查询一个用户对应的多个地址 实现一对多的查询
@@ -162,6 +163,11 @@ private Role role;
         sqlSession.close();
     }
 ```
+
+
+
+### 更加全面的关于Mybatis的高级映射demo
+https://github.com/bearbrick0/Mybatis_test
 
 
 
