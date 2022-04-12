@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -32,13 +33,11 @@ public class Address implements Serializable {
     //创建者
     private Long createdBy;
     //创建时间
-    private LocalDateTime creationDate;
+    private Date creationDate;
     //修改者
     private Long modifyBy;
     //修改时间
-    private LocalDateTime modifyDate;
+    private Date modifyDate;
     //用户ID
     private Long userId;
-
-
 }

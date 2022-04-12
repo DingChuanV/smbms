@@ -18,4 +18,6 @@ public interface BillMapper {
      * @date 2022/3/29 8:55 AM
      */
     List<Bill> queryAllBill();
+
+
 }

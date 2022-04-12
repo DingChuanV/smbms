@@ -4,6 +4,53 @@
 
 <mapper namespace="com.uin.mapper.AddressMapper">
 
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.uin.pojo.Address">
+        <id column="id" property="id"/>
+        <result column="contact" property="contact"/>
+        <result column="addressDesc" property="addressDesc"/>
+        <result column="postCode" property="postCode"/>
+        <result column="tel" property="tel"/>
+        <result column="createdBy" property="createdBy"/>
+        <result column="creationDate" property="creationDate"/>
+        <result column="modifyBy" property="modifyBy"/>
+        <result column="modifyDate" property="modifyDate"/>
+        <result column="userId" property="userId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , contact, addressDesc, postCode, tel, createdBy, creationDate, modifyBy, modifyDate, userId
+    </sql>
+    <insert id="addAddress">
+        insert into smbms_address(contact, addressDesc, postCode, tel, createdBy, creationDate,
+                                  modifyBy, modifyDate, userId)
+        values (#{contact}, #{addressDesc},
+                #{postCode}, #{tel}, #{createdBy},
+                #{creationDate}, #{modifyBy},
+                #{modifyDate}, #{userId})
+    </insert>
+    <update id="updateAddress">
+        update smbms_address
+        set contact=#{contact},
+            addressDesc=#{addressDesc},
+            postCode=#{postCode},
+            tel=#{tel},
+            createdBy=#{createdBy},
+            creationDate=#{creationDate},
+            modifyBy=#{modifyBy},
+            modifyDate=#{modifyDate},
+            userId=#{userId}
+        where id = #{id}
+    </update>
+    <delete id="deleteByAddress">
+        delete
+        from smbms_address
+        where id = #{id};
+    </delete>
+
+
     <select id="queryAllAddress" resultType="Address">
         select *
         from smbms_address;

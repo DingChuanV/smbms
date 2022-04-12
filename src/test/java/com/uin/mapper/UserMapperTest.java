@@ -1,15 +1,10 @@
-package com.uin.dao;
+package com.uin.mapper;
 
-import com.uin.mapper.*;
 import com.uin.pojo.*;
 import com.uin.utils.MybatisUtils;
-import com.uin.vo.UserSearchVo;
-import jdk.jfr.StackTrace;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import javax.xml.crypto.Data;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,7 +15,7 @@ import java.util.List;
  * @description: TODO
  * @date 2022/3/15/5:40 PM
  */
-public class MapperTest {
+public class UserMapperTest {
 
     @Test
     public void TestQueryUser() {
