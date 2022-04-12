@@ -141,4 +141,14 @@ public interface UserMapper {
      * @date 2022/4/12 9:00 AM
      */
     List<User> getUserListByRoleId(@Param("id") int roleId);
+
+    /**
+     * 根据用户的id查询多个地址
+     *
+     * @param user_id
+     * @return java.util.List<com.uin.pojo.User>
+     * @author wanglufei
+     * @date 2022/4/12 9:43 AM
+     */
+    List<User> getAddressListByUserId(@Param("id") int user_id);
 }

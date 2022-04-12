@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -22,6 +23,8 @@ import java.util.Date;
 public class User implements Serializable {
     //实现一个用户对应一个角色
     private Role role;
+    //一对多
+    private List<Address> addresses;
     //主键ID
     private Long id;
     //用户编码

@@ -6,25 +6,26 @@
 
     <!-- 通用查询映射结果 手动映射-->
     <resultMap id="BaseResultMap" type="com.uin.pojo.User">
-        <id column="id" property="id" />
+        <id column="id" property="id"/>
         <!--column 数据库字段名 property表示查询出来的属性对应的值赋给实体对象的属性-->
-        <result column="userCode" property="userCode" />
-        <result column="userName" property="userName" />
-        <result column="userPassword" property="userPassword" />
-        <result column="gender" property="gender" />
-        <result column="birthday" property="birthday" />
-        <result column="phone" property="phone" />
-        <result column="address" property="address" />
-        <result column="userRole" property="userRole" />
-        <result column="createdBy" property="createdBy" />
-        <result column="creationDate" property="creationDate" />
-        <result column="modifyBy" property="modifyBy" />
-        <result column="modifyDate" property="modifyDate" />
+        <result column="userCode" property="userCode"/>
+        <result column="userName" property="userName"/>
+        <result column="userPassword" property="userPassword"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="userRole" property="userRole"/>
+        <result column="createdBy" property="createdBy"/>
+        <result column="creationDate" property="creationDate"/>
+        <result column="modifyBy" property="modifyBy"/>
+        <result column="modifyDate" property="modifyDate"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy, creationDate, modifyBy, modifyDate
+        id
+        , userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy, creationDate, modifyBy, modifyDate
     </sql>
 
     <insert id="addUser" parameterType="User">
@@ -56,8 +57,9 @@
     </update>
     <delete id="deleteUserById">
         delete
-        from smbms_user where id=
-        #{id};
+        from smbms_user
+        where id =
+              #{id};
     </delete>
 
     <select id="queryAllUser" resultType="User">
@@ -171,13 +173,36 @@
     </resultMap>
     <select id="getUserListByRoleId" resultMap="UserListAndRoleResult">
         select user.*,
-               role.id as role_id,role.roleCode,role.roleName
+               role.id as role_id,
+               role.roleCode,
+               role.roleName
         from smbms_user as user
         inner join
             smbms_role as role
         on
             user.userRole= role.id
         where user.userRole=#{id};
+    </select>
+    <!--实现一对多的手动映射-->
+    <resultMap id="AddressResult" type="User">
+        <id property="id" column="id"/>
+        <result property="userName" column="userName"/>
+        <result property="userCode" column="userCode"/>
+        <result property="gender" column="gender"/>
+        <result property="userRole" column="userRole"/>
+        <collection property="addresses" ofType="Address">
+            <id property="id" column="a_id"/>
+            <result property="contact" column="contact"/>
+            <result property="addressDesc" column="addressDesc"/>
+            <result property="postCode" column="postCode"/>
+            <result property="tel" column="tel"/>
+        </collection>
+    </resultMap>
+    <select id="getAddressListByUserId" resultMap="AddressResult">
+        select user.*, a.id as a_id, a.contact, a.addressDesc, a.postCode, a.tel
+        from smbms_user user inner join smbms_address as a
+        on user.id=a.userId
+        where user.id=#{id}
     </select>
 
 </mapper>

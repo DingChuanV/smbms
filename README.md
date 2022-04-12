@@ -92,13 +92,73 @@ private Role role;
         where user.userRole=#{id};
     </select>
 ```
+测试
+```java
+/**
+     * 根据roleId 查询用户的角色实现resultMap的高级映射：一对一的关系
+     *
+     * @author wanglufei
+     * @date 2022/4/12 9:20 AM
+     */
+    @Test
+    public void getUserListByRoleId_test() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> userListByRoleId = mapper.getUserListByRoleId(1);
+        System.out.println(userListByRoleId);
+        sqlSession.close();
+    }
+```
 
 
 
 2. 处理一对多的关系
-本系统中，一个用户对应多个地址
+本系统中，一个用户对应多个地址，根据用户的id查询多个地址
 
+```java
+    //一对多
+    private List<Address> addresses;
+```
 
+```xml
+<!--实现一对多的手动映射-->
+    <resultMap id="AddressResult" type="User">
+        <id property="id" column="id"/>
+        <result property="userName" column="userName"/>
+        <result property="userCode" column="userCode"/>
+        <result property="gender" column="gender"/>
+        <result property="userRole" column="userRole"/>
+        <collection property="addresses" ofType="Address">
+            <id property="id" column="a_id"/>
+            <result property="contact" column="contact"/>
+            <result property="addressDesc" column="addressDesc"/>
+            <result property="postCode" column="postCode"/>
+            <result property="tel" column="tel"/>
+        </collection>
+    </resultMap>
+    <select id="getAddressListByUserId" resultMap="AddressResult">
+        select user.*, a.id as a_id, a.contact, a.addressDesc, a.postCode, a.tel
+        from smbms_user user inner join smbms_address as a
+        on user.id=a.userId
+        where user.id=#{id}
+    </select>
+```
+测试
+```java
+/**
+     * 查询一个用户对应的多个地址 实现一对多的查询
+     * @author wanglufei
+     * @date 2022/4/12 9:53 AM
+     */
+    @Test
+    public void getAddressListByUserId_test(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> addressListByUserId = mapper.getAddressListByUserId(1);
+        System.out.println(addressListByUserId);
+        sqlSession.close();
+    }
+```
 
 
 

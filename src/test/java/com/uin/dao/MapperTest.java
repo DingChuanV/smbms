@@ -4,6 +4,7 @@ import com.uin.mapper.*;
 import com.uin.pojo.*;
 import com.uin.utils.MybatisUtils;
 import com.uin.vo.UserSearchVo;
+import jdk.jfr.StackTrace;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
@@ -312,4 +313,17 @@ public class MapperTest {
         sqlSession.close();
     }
 
+    /**
+     * 查询一个用户对应的多个地址 实现一对多的查询
+     * @author wanglufei
+     * @date 2022/4/12 9:53 AM
+     */
+    @Test
+    public void getAddressListByUserId_test(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> addressListByUserId = mapper.getAddressListByUserId(1);
+        System.out.println(addressListByUserId);
+        sqlSession.close();
+    }
 }
