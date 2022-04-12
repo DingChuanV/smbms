@@ -3,6 +3,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.uin.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 手动映射-->
+    <resultMap id="BaseResultMap" type="com.uin.pojo.User">
+        <id column="id" property="id" />
+        <!--column 数据库字段名 property表示查询出来的属性对应的值赋给实体对象的属性-->
+        <result column="userCode" property="userCode" />
+        <result column="userName" property="userName" />
+        <result column="userPassword" property="userPassword" />
+        <result column="gender" property="gender" />
+        <result column="birthday" property="birthday" />
+        <result column="phone" property="phone" />
+        <result column="address" property="address" />
+        <result column="userRole" property="userRole" />
+        <result column="createdBy" property="createdBy" />
+        <result column="creationDate" property="creationDate" />
+        <result column="modifyBy" property="modifyBy" />
+        <result column="modifyDate" property="modifyDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy, creationDate, modifyBy, modifyDate
+    </sql>
+
     <insert id="addUser" parameterType="User">
         insert into smbms.smbms_user(userCode, userName, userPassword, gender, birthday, phone,
                                      address, userRole, createdBy, creationDate)
@@ -60,6 +84,12 @@
     </select>
 
     <resultMap id="userList" type="User">
+        <!--
+        看的是 select user.*,
+                     role.roleName
+        的role.roleName
+        进行手动映射
+        -->
         <result property="userRoleName" column="roleName"/>
     </resultMap>
     <select id="queryUserByUser2" resultMap="userList">
@@ -123,6 +153,31 @@
             , '%')
           and user.userRole=#{userRole}
           and user.userRole = role.id;
+    </select>
+
+    <!--根据roleId 查询用户的角色实现resultMap的高级映射：一对一的关系-->
+    <resultMap id="UserListAndRoleResult" type="User">
+        <id property="id" column="id"/>
+        <result property="userName" column="userName"/>
+        <result property="userCode" column="userCode"/>
+        <result property="gender" column="gender"/>
+        <result property="userRole" column="userRole"/>
+        <result property="userRoleName" column="roleName"/>
+        <association property="role" javaType="Role">
+            <id property="id" column="role_id"/>
+            <result property="roleCode" column="roleCOde"/>
+            <result property="roleName" column="roleName"/>
+        </association>
+    </resultMap>
+    <select id="getUserListByRoleId" resultMap="UserListAndRoleResult">
+        select user.*,
+               role.id as role_id,role.roleCode,role.roleName
+        from smbms_user as user
+        inner join
+            smbms_role as role
+        on
+            user.userRole= role.id
+        where user.userRole=#{id};
     </select>
 
 </mapper>

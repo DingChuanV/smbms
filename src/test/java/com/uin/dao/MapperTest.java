@@ -297,4 +297,19 @@ public class MapperTest {
         }
     }
 
+    /**
+     * 根据roleId 查询用户的角色实现resultMap的高级映射：一对一的关系
+     *
+     * @author wanglufei
+     * @date 2022/4/12 9:20 AM
+     */
+    @Test
+    public void getUserListByRoleId_test() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> userListByRoleId = mapper.getUserListByRoleId(1);
+        System.out.println(userListByRoleId);
+        sqlSession.close();
+    }
+
 }

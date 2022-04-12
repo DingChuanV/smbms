@@ -130,4 +130,15 @@ public interface UserMapper {
      * @date 2022/3/29 10:30 AM
      */
     List<User> queryUserByUser2(Map<Object, Object> map);
+
+    /**
+     * 根据roleid 查询所有用户的角色
+     * 实现resultMap的高级映射：一对一
+     *
+     * @param roleId
+     * @return java.util.List<com.uin.pojo.User>
+     * @author wanglufei
+     * @date 2022/4/12 9:00 AM
+     */
+    List<User> getUserListByRoleId(@Param("id") int roleId);
 }

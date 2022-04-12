@@ -20,6 +20,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
+    //实现一个用户对应一个角色
+    private Role role;
     //主键ID
     private Long id;
     //用户编码
