@@ -173,7 +173,42 @@ https://github.com/bearbrick0/Mybatis_test
 
 我们在对其他表写完增删查改mapper接口和mapper.xml是，会要求测试。我们手写数据表的set方法很麻烦。下面这个插件，就很有帮助。
 ![image-20220414083344800](https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204140833152.png)
+
 <img src="https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204140836898.png" alt="image-20220414083654205" style="zoom:50%;" />
+
+### mybatis的缓存
+
+#### 一级缓存
+一级缓存: 基于 PerpetualCache 的 HashMap 本地缓存，其存储作用域为 Session，当 Session flush 或 close 之后，该 Session 中的所有 Cache 就将清空，
+默认打开一级缓存。
+#### 二级缓存
+
+博客链接：https://www.cnblogs.com/bearbrick0/p/16045422.html
+
+### 动态sql
+- if
+```xml
+    <if test="title!=null">
+        
+    </if>
+```
+
+
+1. 实现多条件的查询
+```xml
+
+```
+2.
+
+
+
+
+
+
+
+
+
+
 
 
 
