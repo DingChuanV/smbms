@@ -169,6 +169,13 @@ private Role role;
 ### 更加全面的关于Mybatis的高级映射demo
 https://github.com/bearbrick0/Mybatis_test
 
+### 关于好用的插件
+
+我们在对其他表写完增删查改mapper接口和mapper.xml是，会要求测试。我们手写数据表的set方法很麻烦。下面这个插件，就很有帮助。
+![image-20220414083344800](https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204140833152.png)
+<img src="https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204140836898.png" alt="image-20220414083654205" style="zoom:50%;" />
+
+
 
 
 
