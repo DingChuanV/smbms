@@ -104,4 +104,13 @@ public class ProviderTest {
         } else
             sqlSession.close();
     }
+
+    @Test
+    public void queryProviderWithBills(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        ProviderMapper mapper = sqlSession.getMapper(ProviderMapper.class);
+        List<Provider> providers = mapper.queryProviderWithBills(1);
+        System.out.println(providers);
+        sqlSession.close();
+    }
 }

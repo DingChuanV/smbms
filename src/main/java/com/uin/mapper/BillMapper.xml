@@ -17,7 +17,7 @@
         <result column="creationDate" property="creationDate"/>
         <result column="modifyBy" property="modifyBy"/>
         <result column="modifyDate" property="modifyDate"/>
-        <result column="providerId" property="modifyDate"/>
+        <result column="providerId" property="providerId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -72,7 +72,7 @@
     <select id="queryBillShowProvider" resultMap="BillsWithProvider">
         SELECT b.billCode,
                b.productName,
-               b.providerId as id,
+               b.providerId,
                p.proName,
                p.proContact pcontact,
                p.proPhone pphone,

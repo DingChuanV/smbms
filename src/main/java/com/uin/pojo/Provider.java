@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -67,6 +68,9 @@ public class Provider implements Serializable {
      * 更新者（userId）
      */
     private Long modifyBy;
+
+
+    private List<Bill> billList;
 
 
 }

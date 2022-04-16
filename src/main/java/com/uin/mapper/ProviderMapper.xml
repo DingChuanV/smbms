@@ -50,11 +50,38 @@
     <delete id="deleteById">
         delete
         from smbms_provider
-        where id=#{id};
+        where id = #{id};
     </delete>
 
     <select id="queryAllProvider" resultType="Provider">
         select *
         from smbms.smbms_provider;
     </select>
+
+    <resultMap id="ProviderWithBills" type="Provider" extends="BaseResultMap">
+        <collection property="billList" ofType="Bill">
+            <id property="id" column="id"/>
+            <result column="code" property="billCode"/>
+            <result column="price" property="totalPrice"/>
+            <result column="payment" property="isPayment"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryProviderWithBills" resultMap="ProviderWithBills">
+
+        SELECT p.id,
+               p.proCode,
+               p.proName,
+               p.proContact,
+               p.proPhone,
+               b.billCode   as code,
+               b.totalPrice as price,
+               b.isPayment  as payment
+        from smbms_provider p,
+             smbms_bill b
+        WHERE p.id = b.providerId
+          AND p.id = #{id}
+    </select>
+
+
 </mapper>

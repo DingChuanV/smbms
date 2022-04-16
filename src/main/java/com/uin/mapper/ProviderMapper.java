@@ -49,4 +49,12 @@ public interface ProviderMapper {
      * @return int
      */
     int deleteById(@Param("id") int id);
+
+    /**
+     *
+     * @author wanglufei
+     * @date 2022/4/16 6:55 PM
+     * @return java.util.List<com.uin.pojo.Provider>
+     */
+    List<Provider> queryProviderWithBills(@Param("id") int id);
 }
