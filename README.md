@@ -202,7 +202,9 @@ https://github.com/bearbrick0/Mybatis_test
 
 
 ## 订单表的association
-还有一种就是左关联 可是我就是应付一下作业 还要学习Vue 可以自己去尝试一下，也就是改一下就好
+其实有个好办法 现在sql的图形化工具中写好sql，在去idea中改改参数。
+
+我这个是子关联，还有一种就是左关联，也就是left join 可是我就是应付一下作业 还要学习Vue 可以自己去尝试一下，也就是改一下就好
 ```sql
 SELECT
     b.billCode,
