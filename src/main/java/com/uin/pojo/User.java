@@ -21,37 +21,68 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
-    //实现一个用户对应一个角色
+    /**
+     * 实现一个用户对应一个角色
+     */
     private Role role;
-    //一对多
+    /**
+     * 一对多
+     */
     private List<Address> addresses;
-    //主键ID
+    /**
+     * 主键ID
+     */
     private Long id;
-    //用户编码
+    /**
+     * 用户编码
+     */
     private String userCode;
-    //用户名称
+    /**
+     * 用户名称
+     */
     private String userName;
-    //用户密码
+    /**
+     * 用户密码
+     */
     private String userPassword;
-    //性别（1:女、 2:男）
+    /**
+     * 性别（1:女、 2:男）
+     */
     private Integer gender;
-    //出生日期
+    /**
+     * 出生日期
+     */
     private Date birthday;
-    //手机
+    /**
+     * 手机
+     */
     private String phone;
-    //地址
+    /**
+     * 地址
+     */
     private String address;
-    //用户角色（取自角色表-角色id）
+    /**
+     * 用户角色（取自角色表-角色id）
+     */
     private Long userRole;
-
-    //创建者（userId）
+    /**
+     * 创建者（userId）
+     */
     private Long createdBy;
-    //创建时间
+    /**
+     * 创建时间
+     */
     private Date creationDate;
-    //更新者（userId）
+    /**
+     * 更新者（userId）
+     */
     private Long modifyBy;
-    //更新时间
+    /**
+     * 更新时间
+     */
     private Date modifyDate;
-
-    private String userRoleName;//关联查询 role才能获取到值
+    /**
+     * 关联查询 role才能获取到值
+     */
+    private String userRoleName;
 }

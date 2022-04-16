@@ -9,42 +9,67 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * <p>
- *
- * </p>
- *
  * @author wanglufei
- * @since 2022-03-15
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Bill implements Serializable {
-    //主键ID
+    /**
+     * 主键ID
+     */
     private Long id;
-    //账单编码
+    /**
+     * 账单编码
+     */
     private String billCode;
-    //商品名称
+    /**
+     * 商品名称
+     */
     private String productName;
-    //商品描述
+    /**
+     * 商品描述
+     */
     private String productDesc;
-    //商品单位
+    /**
+     * 商品单位
+     */
     private String productUnit;
-    //商品数量
+    /**
+     * 商品数量
+     */
     private BigDecimal productCount;
-    //商品总额
+    /**
+     * 商品总额
+     */
     private BigDecimal totalPrice;
-    //是否支付（1：未支付 2：已支付）
+    /**
+     * 账单是否支付（1：未支付 2：已支付）编码
+     */
     private Integer isPayment;
-    //创建者（userId）
+    /**
+     * 创建者（userId）
+     */
     private Long createdBy;
-    //创建时间
+    /**
+     * 创建时间
+     */
     private LocalDateTime creationDate;
-    //更新者（userId）
+    /**
+     * 更新者（userId）
+     */
     private Long modifyBy;
-    //更新时间
+    /**
+     * 更新时间
+     */
     private LocalDateTime modifyDate;
-    //供应商ID
+    /**
+     * 供应商ID
+     */
     private Long providerId;
+    /**
+     * 供应商provider
+     */
+    private Provider provider;
 
 }

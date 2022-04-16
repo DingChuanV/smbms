@@ -108,4 +108,17 @@ public class BillTest {
             sqlSession.rollback();
         }
     }
+    /**
+     *
+     * @author wanglufei
+     * @date 2022/4/16 6:34 PM
+     */
+    @Test
+    public void queryBillShowProvider(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        BillMapper mapper = sqlSession.getMapper(BillMapper.class);
+        List<Bill> billList = mapper.queryBillShowProvider(1, "大", 2);
+        System.out.println(billList);
+        sqlSession.close();
+    }
 }

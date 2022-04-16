@@ -50,7 +50,15 @@ public interface BillMapper {
      */
     int deleteById(@Param("id") int id);
 
-
-
-
+    /**
+     *
+     * @author wanglufei
+     * @date 2022/4/16 6:14 PM
+     * @param id
+     * @param productName
+     * @param isPayment
+     * @return null
+     */
+    List<Bill> queryBillShowProvider(@Param("id") int id,@Param("productName") String productName,
+                          @Param("isPayment") int isPayment);
 }

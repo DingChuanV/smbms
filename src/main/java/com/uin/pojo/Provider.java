@@ -19,29 +19,53 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Provider implements Serializable {
-    //主键ID
+    /**
+     * 主键ID
+     */
     private Long id;
-    //供应商编码
+    /**
+     * 供应商编码
+     */
     private String proCode;
-    //供应商名称
+    /**
+     * 供应商名称
+     */
     private String proName;
-    //供应商详细描述
+    /**
+     * 供应商详细描述
+     */
     private String proDesc;
-    //供应商联系人
+    /**
+     * 供应商联系人
+     */
     private String proContact;
-    //联系电话
+    /**
+     * 联系电话
+     */
     private String proPhone;
-    //地址
+    /**
+     * 地址
+     */
     private String proAddress;
-    //传真
+    /**
+     * 传真
+     */
     private String proFax;
-    //创建者（userId）
+    /**
+     * 创建者（userId）
+     */
     private Long createdBy;
-    //创建时间
+    /**
+     * 创建时间
+     */
     private LocalDateTime creationDate;
-    //更新时间
+    /**
+     * 更新时间
+     */
     private LocalDateTime modifyDate;
-    //更新者（userId）
+    /**
+     * 更新者（userId）
+     */
     private Long modifyBy;
 
 

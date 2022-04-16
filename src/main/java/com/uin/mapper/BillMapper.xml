@@ -60,4 +60,28 @@
         select *
         from smbms.smbms_bill;
     </select>
+
+    <resultMap id="BillsWithProvider" type="Bill" extends="BaseResultMap">
+        <association property="provider" javaType="Provider">
+            <id column="id" property="id"/>
+            <result column="pcontact" property="proContact"/>
+            <result column="pphone" property="proPhone"/>
+        </association>
+    </resultMap>
+
+    <select id="queryBillShowProvider" resultMap="BillsWithProvider">
+        SELECT b.billCode,
+               b.productName,
+               b.providerId as id,
+               p.proName,
+               p.proContact pcontact,
+               p.proPhone pphone,
+               b.totalPrice,
+               b.isPayment
+        from smbms_bill as b,
+             smbms_provider as p
+        WHERE #{id} = p.id
+          AND b.productName like CONCAT("%", #{productName}, "%")
+          AND b.isPayment = #{isPayment}
+    </select>
 </mapper>

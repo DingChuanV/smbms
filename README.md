@@ -201,6 +201,28 @@ https://github.com/bearbrick0/Mybatis_test
 2.
 
 
+## 订单表的association
+```sql
+SELECT
+    b.billCode,
+    b.productName,
+    b.providerId,
+    p.proName,
+    p.proContact,
+    p.proPhone,
+    b.totalPrice,
+    b.isPayment
+from
+    smbms_bill as b,
+    smbms_provider as p
+WHERE
+    b.providerId = p.id
+  AND
+    b.productName like CONCAT('%','大','%')
+  AND
+    b.isPayment =2
+```
+
 
 
 
