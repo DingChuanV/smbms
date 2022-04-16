@@ -202,6 +202,7 @@ https://github.com/bearbrick0/Mybatis_test
 
 
 ## 订单表的association
+还有一种就是左关联 可是我就是应付一下作业 还要学习Vue 可以自己去尝试一下，也就是改一下就好
 ```sql
 SELECT
     b.billCode,
@@ -222,7 +223,26 @@ WHERE
   AND
     b.isPayment =2
 ```
+## 供应商表的按条件查询
 
+```sql
+SELECT
+    p.id,
+    p.proCode,
+    p.proName,
+    p.proContact,
+    p.proPhone,
+    b.billCode as code,
+    b.totalPrice as price,
+    b.isPayment as payment
+from
+    smbms_provider p,
+    smbms_bill b
+WHERE
+    p.id=b.providerId
+  AND
+    p.id=1
+```
 
 
 
