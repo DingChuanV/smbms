@@ -117,7 +117,7 @@ public class BillTest {
     public void queryBillShowProvider(){
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BillMapper mapper = sqlSession.getMapper(BillMapper.class);
-        List<Bill> billList = mapper.queryBillShowProvider(1, "大", 2);
+        List<Bill> billList = mapper.queryBillShowProvider(13, "洗", 2);
         System.out.println(billList);
         sqlSession.close();
     }

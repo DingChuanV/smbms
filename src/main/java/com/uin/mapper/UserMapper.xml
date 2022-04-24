@@ -38,6 +38,7 @@
 
     <update id="updateUser">
         update smbms.smbms_user
+            /*trim prefix="set"*/
         set userCode=#{userCode},
             userName=#{userName},
             userPassword=#{userPassword},
@@ -78,11 +79,17 @@
     </select>
     <select id="queryUserByUser" resultType="com.uin.pojo.User">
         select id,
-               userName,
-               userRole as roleId
+        userName,
+        userRole as roleId
         from smbms_user
-        where userName like CONCAT('%', #{username}, '%')
-          and userRole = #{roleId};
+        <trim prefix="where" prefixOverrides="and | or" suffix="order by id">
+            <if test="userName != null and userName!=''">
+                userName like CONCAT('%', #{username}, '%')
+            </if>
+            <if test="roleId!='' and roleId!=null">
+                and userRole = #{roleId};
+            </if>
+        </trim>
     </select>
 
     <resultMap id="userList" type="User">
@@ -118,7 +125,7 @@
     <resultMap id="userRoleList" type="User">
         <association property="userRoleName"/>
     </resultMap>
-    <select id="queryRoleByUserName" resultType="com.uin.pojo.User" resultMap="userRoleList">
+    <select id="queryRoleByUserName" resultMap="userRoleList">
         select user.*,
                role.roleName
         from smbms_user as user ,
@@ -203,6 +210,56 @@
         from smbms_user user inner join smbms_address as a
         on user.id=a.userId
         where user.id=#{id}
+    </select>
+
+    <select id="getUserByRoleIdsArray" resultType="com.uin.pojo.User">
+        select *
+        from smbms_user
+        where userRole in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="getUserByRoleIdsList" resultType="com.uin.pojo.User">
+        select *
+        from smbms_user
+        where userRole in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+    <select id="getUserByRoleIdsMap" resultType="com.uin.pojo.User">
+        select *
+        from smbms_user
+        where gender=#{gender} and userRole in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <resultMap id="userListBypage" type="User" extends="BaseResultMap">
+        <association property="role" javaType="Role">
+            <id property="id" column="id"/>
+            <result property="roleName" column="rname"/>
+        </association>
+    </resultMap>
+    <select id="getUserListByPage" resultMap="userListBypage">
+        select
+        u.*,
+        r.roleName rname
+        from smbms_user u ,
+        smbms_role r
+        where
+        u.userRole=r.id
+        <if test="roleId!=null and roleId!=''">
+            and u.userRole =#{roleId}
+        </if>
+        <if test="userName!=null and userName!=''">
+            and u.userName like concat("%",#{userName},"%")
+        </if>
+        order by r.id
+        limit #{from},#{size};
     </select>
 
 </mapper>

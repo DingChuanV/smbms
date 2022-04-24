@@ -6,9 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author wanglufei
@@ -129,16 +127,16 @@ public class UserMapperTest {
      * @author wanglufei
      * @date 2022/4/2 11:26 AM
      */
-    @Test
-    public void queryUserByUser() {
-        SqlSession sqlSession = MybatisUtils.getSqlSession();
-        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-        HashMap<Object, Object> map = new HashMap<>();
-        map.put("username", "邓超");
-        map.put("roleId", 2);
-        mapper.queryUserByUser(map);
-        sqlSession.close();
-    }
+//    @Test
+//    public void queryUserByUser() {
+//        SqlSession sqlSession = MybatisUtils.getSqlSession();
+//        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+//        HashMap<Object, Object> map = new HashMap<>();
+//        map.put("username", "邓超");
+//        map.put("roleId", 2);
+//        mapper.queryUserByUser(map);
+//        sqlSession.close();
+//    }
 
     /**
      * 查询用户的角色--测试类
@@ -308,17 +306,83 @@ public class UserMapperTest {
         sqlSession.close();
     }
 
+
+    //queryUserByUser
+//    @Test
+//    public void queryUserByUserTest() {
+//        SqlSession sqlSession = MybatisUtils.getSqlSession();
+//        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("username","邓");
+//        List<User> users = mapper.queryUserByUser(map);
+//        System.out.println(users);
+//        sqlSession.close();
+//    }
+
     /**
      * 查询一个用户对应的多个地址 实现一对多的查询
+     *
      * @author wanglufei
      * @date 2022/4/12 9:53 AM
      */
     @Test
-    public void getAddressListByUserId_test(){
+    public void getAddressListByUserId_test() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         List<User> addressListByUserId = mapper.getAddressListByUserId(1);
         System.out.println(addressListByUserId);
         sqlSession.close();
     }
+
+    @Test
+    public void getUserByRoleIdsArray() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> userByRoleIdsArray = mapper.getUserByRoleIdsArray(new Integer[]{2, 3});
+        System.out.println(userByRoleIdsArray);
+        sqlSession.close();
+    }
+
+    //getUserByRoleIdsList
+
+    @Test
+    public void getUserByRoleIdsList() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        List<User> userList = mapper.getUserByRoleIdsList(list);
+        System.out.println(userList);
+        sqlSession.close();
+    }
+
+    //getUserByRoleIdsMap
+
+    @Test
+    public void getUserByRoleIdsMap() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        HashMap<String, Object> map = new HashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        map.put("gender",1);
+        // <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        map.put("ids",list);
+        List<User> byRoleIdsMap = mapper.getUserByRoleIdsMap(map);
+        System.out.println(byRoleIdsMap);
+        sqlSession.close();
+    }
+
+    //getUserListByPage
+    @Test
+    public void getUserListByPage() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> userListByPage = mapper.getUserListByPage("", null, 1, 10);
+        System.out.println(userListByPage);
+        sqlSession.close();
+    }
+
 }

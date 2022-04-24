@@ -68,7 +68,6 @@
     </resultMap>
 
     <select id="queryProviderWithBills" resultMap="ProviderWithBills">
-
         SELECT p.id,
                p.proCode,
                p.proName,
