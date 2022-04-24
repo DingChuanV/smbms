@@ -14,6 +14,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserSearchVo {
+    /**
+     * 名字
+     */
     private String userName;
+    /**
+     * 角色的id
+     */
     private int roleId;
 }

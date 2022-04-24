@@ -57,4 +57,7 @@ public interface ProviderMapper {
      * @return java.util.List<com.uin.pojo.Provider>
      */
     List<Provider> queryProviderWithBills(@Param("id") int id);
+
+
+    //List<Provider> query
 }

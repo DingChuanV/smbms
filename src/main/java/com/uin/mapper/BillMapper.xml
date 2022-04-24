@@ -64,24 +64,26 @@
     <resultMap id="BillsWithProvider" type="Bill" extends="BaseResultMap">
         <association property="provider" javaType="Provider">
             <id column="id" property="id"/>
+            <result property="proName" column="pname"/>
             <result column="pcontact" property="proContact"/>
             <result column="pphone" property="proPhone"/>
         </association>
     </resultMap>
 
     <select id="queryBillShowProvider" resultMap="BillsWithProvider">
-        SELECT b.billCode,
-               b.productName,
-               b.providerId,
-               p.proName,
-               p.proContact pcontact,
-               p.proPhone pphone,
-               b.totalPrice,
-               b.isPayment
-        from smbms_bill as b,
-             smbms_provider as p
-        WHERE #{id} = p.id
-          AND b.productName like CONCAT("%", #{productName}, "%")
-          AND b.isPayment = #{isPayment}
+        select
+            b.billCode,
+            b.productName,
+            b.providerId,
+            p.proName as pname,
+            p.proPhone as pphone,
+            p.proContact as pcontact
+        from
+            smbms_bill b
+                left join
+            smbms_provider p
+            on #{id}=p.id
+        where b.productName like concat("%",#{productName},"%")
+          and b.isPayment=#{isPayment}
     </select>
 </mapper>

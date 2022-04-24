@@ -79,7 +79,7 @@ public interface UserMapper {
      * @author wanglufei
      * @date 2022/3/29 8:53 AM
      */
-    List<User> getUserByUsername(@Param("userName") String username);
+    List<User> getUserByUsername(@Param("username") String username);
 
     /**
      * 根据id查询用户
@@ -119,7 +119,7 @@ public interface UserMapper {
      * @author wanglufei
      * @date 2022/3/29 9:09 AM
      */
-    List<User> queryUserByUser(Map<Object, Object> map);
+    //List<User> queryUserByUser(Map<String, Object> map);
 
     /**
      * 多参数值传值2
@@ -151,4 +151,50 @@ public interface UserMapper {
      * @date 2022/4/12 9:43 AM
      */
     List<User> getAddressListByUserId(@Param("id") int user_id);
+
+    /**
+     * @param roleIds array
+     * @return java.util.List<com.uin.pojo.User>
+     * @author wanglufei
+     * @date 2022/4/19 4:27 PM
+     */
+    List<User> getUserByRoleIdsArray(@Param("ids") Integer[] roleIds);//array、list、map
+
+    /**
+     * list
+     *
+     * @param roleIds
+     * @return java.util.List<com.uin.pojo.User>
+     * @author wanglufei
+     * @date 2022/4/19 4:45 PM
+     */
+    List<User> getUserByRoleIdsList(@Param("ids") List<Integer> roleIds);//list、map
+
+    /**
+     * map
+     *
+     * @param map
+     * @return java.util.List<com.uin.pojo.User>
+     * @author wanglufei
+     * @date 2022/4/19 4:44 PM
+     */
+    List<User> getUserByRoleIdsMap(Map<String, Object> map);//list、map roleIds
+
+    /**
+     * 查询用户列表并实现分页
+     * limit 0,5
+     * 查询出来的行
+     * 0，1，2，3，4
+     * @param userName
+     * @param roleId
+     * @param from
+     * @param size
+     * @return java.util.List<com.uin.pojo.User>
+     * @author wanglufei
+     * @date 2022/4/19 5:15 PM
+     */
+    List<User> getUserListByPage(@Param("userName") String userName,
+                                 @Param("roleId") Integer roleId,
+                                 @Param("from") Integer from,
+                                 @Param("size") Integer size);
 }
